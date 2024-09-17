@@ -1,10 +1,10 @@
 package edu.bsu.cs;
 
-public class Revision {
+public class APIRevisionReader {
     private String Username;
     private String timeofchange;
 
-    public Revision(String Username, String timeofchange) {
+    public APIRevisionReader(String Username, String timeofchange) {
         this.Username = Username;
         this.timeofchange = timeofchange;
     }
