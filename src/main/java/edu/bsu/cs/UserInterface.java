@@ -5,6 +5,12 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class UserInterface {
+
+
+    public UserInterface(JSONHandler jsonHandler) {
+    }
+
+
     public static void main(String[] args) throws IOException {
         UserInterface revisionsApp = new UserInterface();
         revisionsApp.runApplication();
