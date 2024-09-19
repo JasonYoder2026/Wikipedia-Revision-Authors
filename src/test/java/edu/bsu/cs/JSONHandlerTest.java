@@ -13,7 +13,9 @@ public class JSONHandlerTest {
         JSONHandler testParser = new JSONHandler();
         InputStream testStream = new FileInputStream("JsonData.json");
         String result = testParser.parseAndPrintData(testStream);
-        Assertions.assertEquals("2024-09-15T22:53:03Z  Aaw1989\n2024-09-15T20:04:58Z  2A00:23C5:E212:D01:9D11:46F1:12D5:47DB\n2024-09-15T19:47:56Z  Aaw1989\n", result);
+        Assertions.assertEquals("There are only 3 revisions.\n" +
+                "2024-09-15T22:53:03Z  Aaw1989\n2024-09-15T20:04:58Z  2A00:23C5:E212:D01:9D11:46F1:12D5:47DB\n" +
+                "2024-09-15T19:47:56Z  Aaw1989\n", result);
     }
 
     @Test

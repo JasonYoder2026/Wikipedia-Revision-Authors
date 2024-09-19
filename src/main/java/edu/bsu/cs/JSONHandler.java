@@ -11,20 +11,22 @@ public class JSONHandler {
         StringBuilder outputBuilder = new StringBuilder();
         String jsonData = new String(jsonStream.readAllBytes());
 
-        if(JsonPath.read(jsonData, "$..missing")){
-            outputBuilder.append("System error: No wikipedia page with that title.\n");
-                    return outputBuilder.toString();
+        JSONArray missingArray = JsonPath.read(jsonData, "$..missing");
+
+        if (!missingArray.isEmpty()) {
+            outputBuilder.append("System errorL No Wikipedia page with that title.\n");
+            return outputBuilder.toString();
         }
-        String Redirection = JsonPath.read(jsonData, "$..title");
-        if(Redirection != null && !Redirection.isEmpty()){
-            outputBuilder.append("Redirected to").append(Redirection).append("\n");
+        JSONArray redirection = JsonPath.read(jsonData, "$..title");
+        if (redirection != null && redirection.isEmpty()) {
+            outputBuilder.append("Redirected to ").append(redirection).append(".\n");
         }
 
         JSONArray timestampsArray = JsonPath.read(jsonData, "$..timestamp");
         JSONArray usernamesArray = JsonPath.read(jsonData, "$..user");
 
         if(timestampsArray.size() < 15) {
-            outputBuilder.append("There are only ").append(timestampsArray.size()).append(" revisions.\n");
+            outputBuilder.append("There are only " + timestampsArray.size() + " revisions.\n");
         }
 
         for (int i = 0; i < timestampsArray.size(); i++) {
@@ -34,6 +36,8 @@ public class JSONHandler {
 
         return outputBuilder.toString();
     }
+
+
 
     public String formatTimeAndUsername(String timestamp, String username) {
         return(timestamp + "  " + username + "\n");
