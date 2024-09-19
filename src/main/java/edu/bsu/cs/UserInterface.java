@@ -6,17 +6,30 @@ import java.util.Scanner;
 
 public class UserInterface {
     public static void main(String[] args) throws IOException {
-        Scanner userInterface = new Scanner(System.in);
-        APIRevisionReader revisionReader = new APIRevisionReader();
-        JSONHandler jsonHandler = new JSONHandler();
+        UserInterface revisionsApp = new UserInterface();
+        revisionsApp.runApplication();
 
-        System.out.println("Enter the title of an article: ");
-        String articleTitle = userInterface.nextLine();
+    }
 
-        InputStream dataStream = revisionReader.retrieveRevisionsFromAPI(articleTitle);
+    public void runApplication() throws IOException {
+        Scanner userInput = new Scanner(System.in);
+
+        System.out.println("Enter the title of an article:");
+        String articleName = userInput.nextLine();
+
+        InputStream dataStream = getRevisionStream(articleName);
 
         System.out.println();
-        System.out.println(jsonHandler.printData(dataStream));
+        System.out.println(printRevisionsData(dataStream));
+    }
 
+    public InputStream getRevisionStream(String articleName) throws IOException {
+        APIRevisionReader revisionReader = new APIRevisionReader();
+        return revisionReader.retrieveRevisionsFromAPI(articleName);
+    }
+
+    public String printRevisionsData(InputStream dataStream) throws IOException {
+        JSONHandler handler = new JSONHandler();
+        return handler.printData(dataStream);
     }
 }
