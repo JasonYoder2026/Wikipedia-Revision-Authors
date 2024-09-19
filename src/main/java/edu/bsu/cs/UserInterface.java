@@ -16,7 +16,7 @@ public class UserInterface {
         InputStream dataStream = revisionReader.retrieveRevisionsFromAPI(articleTitle);
 
         System.out.println();
-        System.out.println(jsonHandler.parseAndPrintData(dataStream));
+        System.out.println(jsonHandler.printData(dataStream));
 
     }
 }
