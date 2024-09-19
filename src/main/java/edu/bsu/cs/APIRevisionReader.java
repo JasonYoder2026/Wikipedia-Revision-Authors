@@ -9,7 +9,8 @@ import java.nio.charset.StandardCharsets;
 
 public class APIRevisionReader {
 
-    public InputStream retrieveRevisionsFromAPI(URL url) throws IOException {
+    public InputStream retrieveRevisionsFromAPI(String articleTitle) throws IOException {
+        URL url = createURL(articleTitle);
         HttpURLConnection stableConnection = (HttpURLConnection) url.openConnection();
         stableConnection.setRequestMethod("GET");
         stableConnection.setRequestProperty("User-Agent", "Revision Reporter/0.1 jason/yoder2@bsu.edu");

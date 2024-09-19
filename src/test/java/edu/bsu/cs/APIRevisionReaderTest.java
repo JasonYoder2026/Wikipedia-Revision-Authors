@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
 
 public class APIRevisionReaderTest {
@@ -20,8 +19,8 @@ public class APIRevisionReaderTest {
     @Test
     public void testRetrieveRevisionsFromAPI() throws IOException {
         APIRevisionReader reader = new APIRevisionReader();
-        URL url = new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=Zappa&redirects=1&formatversion=2&rvprop=timestamp%7Cuser&rvlimit=15");
-        InputStream stream = reader.retrieveRevisionsFromAPI(url);
+        String search = "Zappa";
+        InputStream stream = reader.retrieveRevisionsFromAPI(search);
         Assertions.assertNotNull(stream);
     }
 }
