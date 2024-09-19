@@ -48,7 +48,7 @@ public class JSONHandler {
     public String checkForRedirection(String jsonData) {
         JSONArray redirection = JsonPath.read(jsonData, "$.query.redirects[*].to");
         if (!redirection.isEmpty()) {
-            return"Redirected to " + redirection.getClass().toString() + ".\n";
+            return"Redirected to " + redirection.getFirst().toString() + ".\n";
         } else {
             return "";
         }
