@@ -15,6 +15,10 @@ public class APIRevisionReader {
         stableConnection.setRequestMethod("GET");
         stableConnection.setRequestProperty("User-Agent", "Revision Reporter/0.1 jason/yoder2@bsu.edu");
 
+        if(stableConnection.getResponseCode() !=200){
+            throw new IOException("failed to retrieve data: HTTP " + stableConnection.getResponseCode());
+        }
+
         return stableConnection.getInputStream();
     }
 

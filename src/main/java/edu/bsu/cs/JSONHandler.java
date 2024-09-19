@@ -11,11 +11,20 @@ public class JSONHandler {
         StringBuilder outputBuilder = new StringBuilder();
         String jsonData = new String(jsonStream.readAllBytes());
 
+        if(JsonPath.read(jsonData, "$..missing")){
+            outputBuilder.append("System error: No wikipedia page with that title.\n");
+                    return outputBuilder.toString();
+        }
+        String Redirection = JsonPath.read(jsonData, "$..title");
+        if(Redirection != null && !Redirection.isEmpty()){
+            outputBuilder.append("Redirected to").append(Redirection).append("\n");
+        }
+
         JSONArray timestampsArray = JsonPath.read(jsonData, "$..timestamp");
         JSONArray usernamesArray = JsonPath.read(jsonData, "$..user");
 
         if(timestampsArray.size() < 15) {
-            outputBuilder.append("There are only " + timestampsArray.size() + " revisions.\n");
+            outputBuilder.append("There are only ").append(timestampsArray.size()).append(" revisions.\n");
         }
 
         for (int i = 0; i < timestampsArray.size(); i++) {
