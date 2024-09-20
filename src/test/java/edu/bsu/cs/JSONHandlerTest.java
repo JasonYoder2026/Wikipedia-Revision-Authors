@@ -1,5 +1,6 @@
 package edu.bsu.cs;
 
+import net.minidev.json.JSONArray;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
@@ -10,8 +11,8 @@ public class JSONHandlerTest {
     @Test
     public void testParseAndPrintData() throws IOException {
         JSONHandler testParser = new JSONHandler();
-        InputStream testStream = getJsonDataStream();
-        String result = testParser.printData(testStream);
+        String jsonData = getJsonData();
+        String result = testParser.printData(jsonData);
         Assertions.assertEquals("""
                 Redirected to Frank Zappa.
                 There are only 3 revisions.
@@ -21,13 +22,13 @@ public class JSONHandlerTest {
                 """, result);
     }
 
-    public InputStream getJsonDataStream() {
+    public String getJsonData() {
         try {
             InputStream testStream = JSONHandlerTest.class.getClassLoader().getResourceAsStream("JsonData.json");
             if(testStream == null) {
                 throw new IllegalArgumentException("File not found!");
             }
-            return testStream;
+            return new String(testStream.readAllBytes());
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -38,18 +39,18 @@ public class JSONHandlerTest {
     @Test
     public void testMissingArticle() throws IOException {
         JSONHandler testHandler = new JSONHandler();
-        InputStream testStream = getMissingArticleStream();
-        String result = testHandler.printData(testStream);
+        String jsonData = getMissingArticleStream();
+        String result = testHandler.printData(jsonData);
         Assertions.assertEquals("System error: No Wikipedia page with that title.\n", result);
     }
 
-    public InputStream getMissingArticleStream() {
+    public String getMissingArticleStream() {
         try {
             InputStream testStream = JSONHandlerTest.class.getClassLoader().getResourceAsStream("Missing.json");
             if(testStream == null) {
                 throw new IllegalArgumentException("File not found!");
             }
-            return testStream;
+            return new String(testStream.readAllBytes());
         } catch(Exception e) {
             e.printStackTrace();
         }

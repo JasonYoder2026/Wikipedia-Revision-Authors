@@ -2,6 +2,7 @@ package edu.bsu.cs;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -19,19 +20,20 @@ public class UserInterface {
         System.out.println("Enter the title of an article:");
         String articleName = userInput.nextLine();
 
-        InputStream dataStream = getRevisionStream(articleName);
+        String jsonData = getRevisionStream(articleName);
 
         System.out.println();
-        System.out.println(printRevisionsData(dataStream));
+        System.out.println(printRevisionsData(jsonData));
     }
 
-    public InputStream getRevisionStream(String articleName) throws IOException {
+    public String getRevisionStream(String articleName) throws IOException {
         APIRevisionReader revisionReader = new APIRevisionReader();
-        return revisionReader.retrieveRevisionsFromAPI(articleName);
+        InputStream jsonStream = revisionReader.retrieveRevisionsFromAPI(articleName);
+        return new String(jsonStream.readAllBytes());
     }
 
-    public String printRevisionsData(InputStream dataStream) throws IOException {
+    public String printRevisionsData(String jsonData) throws IOException {
         JSONHandler handler = new JSONHandler();
-        return handler.printData(dataStream);
+        return handler.printData(jsonData);
     }
 }

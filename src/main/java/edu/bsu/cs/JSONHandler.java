@@ -1,15 +1,12 @@
 package edu.bsu.cs;
 
-import java.io.IOException;
-import java.io.InputStream;
 import com.jayway.jsonpath.JsonPath;
 import net.minidev.json.JSONArray;
 
 public class JSONHandler {
 
-    public String printData(InputStream jsonStream) throws IOException {
+    public String printData(String jsonData) {
         StringBuilder outputBuilder = new StringBuilder();
-        String jsonData = new String(jsonStream.readAllBytes());
 
         JSONArray revisions = JsonPath.read(jsonData, "$..timestamp");
         int numOfRevisions = revisions.size();
