@@ -7,13 +7,13 @@ import java.util.Scanner;
 public class UserInterface {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         UserInterface revisionsApp = new UserInterface();
         revisionsApp.runApplication();
 
     }
 
-    public void runApplication() throws IOException {
+    public void runApplication(){
 
         Scanner userInput = new Scanner(System.in);
 
@@ -21,25 +21,36 @@ public class UserInterface {
         String articleName = userInput.nextLine();
 
         if (articleName.isEmpty()) {
-            System.out.println("System Error: No Article Name Submitted");
+            System.err.println("System Error: No Article Name Submitted");
             System.exit(0);
         }
 
         String jsonData = getRevisionData(articleName);
 
-        if (jsonData.isEmpty()) {
-            System.out.println("System Error: Connection Failure");
+        if (jsonData.contains("Error:")) {
+            System.err.println("System Error: Connection Failure");
             System.exit(0);
         }
 
         System.out.println();
-        System.out.println(printRevisionsData(jsonData));
+        String results = printRevisionsData(jsonData);
+        if (results.equals("System error: No Wikipedia page with that title.\n")) {
+            System.err.println("System error: No Wikipedia page with that title.\n");
+            System.exit(0);
+        } else {
+            System.out.println(results);
+        }
     }
 
-    public String getRevisionData(String articleName) throws IOException {
-        APIRevisionReader revisionReader = new APIRevisionReader();
-        InputStream jsonStream = revisionReader.retrieveRevisionsFromAPI(articleName);
-        return new String(jsonStream.readAllBytes());
+    public String getRevisionData(String articleName) {
+        try {
+            APIRevisionReader revisionReader = new APIRevisionReader();
+            InputStream jsonStream = revisionReader.retrieveRevisionsFromAPI(articleName);
+            return new String(jsonStream.readAllBytes());
+        } catch (IOException e) {
+            return ("System Error: " + e.getMessage());
+        }
+
     }
 
     public String printRevisionsData(String jsonData) {
