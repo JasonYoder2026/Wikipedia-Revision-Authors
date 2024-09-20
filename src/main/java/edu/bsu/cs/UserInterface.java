@@ -19,13 +19,13 @@ public class UserInterface {
         System.out.println("Enter the title of an article:");
         String articleName = userInput.nextLine();
 
-        String jsonData = getRevisionStream(articleName);
+        String jsonData = getRevisionData(articleName);
 
         System.out.println();
         System.out.println(printRevisionsData(jsonData));
     }
 
-    public String getRevisionStream(String articleName) throws IOException {
+    public String getRevisionData(String articleName) throws IOException {
         APIRevisionReader revisionReader = new APIRevisionReader();
         InputStream jsonStream = revisionReader.retrieveRevisionsFromAPI(articleName);
         return new String(jsonStream.readAllBytes());

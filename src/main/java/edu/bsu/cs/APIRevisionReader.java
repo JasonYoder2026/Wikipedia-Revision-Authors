@@ -3,6 +3,7 @@ package edu.bsu.cs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -23,6 +24,6 @@ public class APIRevisionReader {
         String apiSearchUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=" +
                 encodedSearch + "&redirects=1&formatversion=2&rvprop=timestamp%7Cuser&rvlimit=15";
 
-        return new URL(apiSearchUrl);
+        return URI.create(apiSearchUrl).toURL();
     }
 }
