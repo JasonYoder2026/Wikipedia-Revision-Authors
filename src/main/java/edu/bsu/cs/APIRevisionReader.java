@@ -12,11 +12,15 @@ public class APIRevisionReader {
 
     public InputStream retrieveRevisionsFromAPI(String articleTitle) throws IOException {
         URL url = createURL(articleTitle);
-        HttpURLConnection stableConnection = (HttpURLConnection) url.openConnection();
-        stableConnection.setRequestMethod("GET");
-        stableConnection.setRequestProperty("User-Agent", "Revision Reporter/0.1 jason/yoder2@bsu.edu");
-
-        return stableConnection.getInputStream();
+        try {
+            HttpURLConnection stableConnection = (HttpURLConnection) url.openConnection();
+            stableConnection.setRequestMethod("GET");
+            stableConnection.setRequestProperty("User-Agent", "Revision Reporter/0.1 jason/yoder2@bsu.edu");
+            return stableConnection.getInputStream();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public URL createURL(String articleSearch) throws IOException{

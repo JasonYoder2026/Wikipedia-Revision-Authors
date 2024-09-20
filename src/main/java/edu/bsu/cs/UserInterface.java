@@ -14,12 +14,23 @@ public class UserInterface {
     }
 
     public void runApplication() throws IOException {
+
         Scanner userInput = new Scanner(System.in);
 
         System.out.println("Enter the title of an article:");
         String articleName = userInput.nextLine();
 
+        if (articleName.isEmpty()) {
+            System.out.println("System Error: No Article Name Submitted");
+            System.exit(0);
+        }
+
         String jsonData = getRevisionData(articleName);
+
+        if (jsonData.isEmpty()) {
+            System.out.println("System Error: Connection Failure");
+            System.exit(0);
+        }
 
         System.out.println();
         System.out.println(printRevisionsData(jsonData));
