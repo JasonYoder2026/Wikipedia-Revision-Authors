@@ -2,7 +2,6 @@ package edu.bsu.cs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -32,7 +31,7 @@ public class UserInterface {
         return new String(jsonStream.readAllBytes());
     }
 
-    public String printRevisionsData(String jsonData) throws IOException {
+    public String printRevisionsData(String jsonData) {
         JSONHandler handler = new JSONHandler();
         return handler.printData(jsonData);
     }

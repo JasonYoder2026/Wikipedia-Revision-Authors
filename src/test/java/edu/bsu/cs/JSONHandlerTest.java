@@ -1,6 +1,5 @@
 package edu.bsu.cs;
 
-import net.minidev.json.JSONArray;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
@@ -9,7 +8,7 @@ import java.io.InputStream;
 public class JSONHandlerTest {
 
     @Test
-    public void testParseAndPrintData() throws IOException {
+    public void testParseAndPrintData(){
         JSONHandler testParser = new JSONHandler();
         String jsonData = getJsonData();
         String result = testParser.printData(jsonData);
@@ -37,7 +36,7 @@ public class JSONHandlerTest {
     }
 
     @Test
-    public void testMissingArticle() throws IOException {
+    public void testMissingArticle() {
         JSONHandler testHandler = new JSONHandler();
         String jsonData = getMissingArticleStream();
         String result = testHandler.printData(jsonData);
