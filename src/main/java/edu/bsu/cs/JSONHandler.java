@@ -22,6 +22,28 @@ public class JSONHandler {
         return outputBuilder.toString();
     }
 
+    public String checkForRedirection(String jsonData) {
+        if (jsonData.contains("\"redirects\"")) {
+            JSONArray redirection = JsonPath.read(jsonData, "$.query.redirects[*].to");
+            return"Redirected to " + redirection.getFirst().toString() + ".\n";
+        } else {
+            return "";
+        }
+    }
+
+    public String checkForLessThan15Revisions(int length) {
+        if (length < 15) {
+            return "There are only " + length + " revisions.\n";
+        } else {
+            return "";
+        }
+    }
+
+    public boolean checkForArticle(String jsonData) {
+        JSONArray missingArray = JsonPath.read(jsonData, "$.query.pages[*].missing");
+        return !missingArray.isEmpty();
+    }
+
     public String readRevisions(String jsonData) {
         StringBuilder revisionsBuilder = new StringBuilder();
         JSONArray timestampsArray = JsonPath.read(jsonData, "$..timestamp");
@@ -33,29 +55,6 @@ public class JSONHandler {
         }
         return revisionsBuilder.toString();
     }
-
-    public String checkForLessThan15Revisions(int length) {
-        if (length < 15) {
-            return "There are only " + length + " revisions.\n";
-        } else {
-            return "";
-        }
-    }
-
-    public String checkForRedirection(String jsonData) {
-        if (jsonData.contains("\"redirects\"")) {
-            JSONArray redirection = JsonPath.read(jsonData, "$.query.redirects[*].to");
-            return"Redirected to " + redirection.getFirst().toString() + ".\n";
-        } else {
-            return "";
-        }
-    }
-
-    public boolean checkForArticle(String jsonData) {
-        JSONArray missingArray = JsonPath.read(jsonData, "$.query.pages[*].missing");
-        return !missingArray.isEmpty();
-    }
-
 
     public String formatTimeAndUsername(String timestamp, String username) {
         return(timestamp + "  " + username + "\n");
