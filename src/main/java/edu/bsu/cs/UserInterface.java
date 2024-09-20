@@ -16,7 +16,6 @@ public class UserInterface {
     public void runApplication(){
 
         Scanner userInput = new Scanner(System.in);
-
         System.out.println("Enter the title of an article:");
         String articleName = userInput.nextLine();
 
@@ -24,7 +23,6 @@ public class UserInterface {
             System.err.println("System Error: No Article Name Submitted");
             System.exit(0);
         }
-
         String jsonData = getRevisionData(articleName);
 
         if (jsonData.contains("Error:")) {
