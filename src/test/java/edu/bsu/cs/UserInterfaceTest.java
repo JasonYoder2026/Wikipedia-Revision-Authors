@@ -37,33 +37,5 @@ public class UserInterfaceTest {
                 """);
     }
 
-    //This test only can be used is runApplication method is modified to accept a string parameter instead of user input. It does pass
-    /*
-
-    @Test
-    public void testRunApplication() throws IOException{
-        UserInterface ui = new UserInterface();
-        String userInput = "Frank Zappa";
-        String result = ui.runApplication(userInput);
-        Assertions.assertEquals(result, """
-                2024-09-18T04:13:02Z  2A00:23C5:E212:D01:4523:A371:376:EB17
-                2024-09-15T22:53:03Z  Aaw1989
-                2024-09-15T20:04:58Z  2A00:23C5:E212:D01:9D11:46F1:12D5:47DB
-                2024-09-15T19:47:56Z  Aaw1989
-                2024-09-15T19:44:41Z  Aaw1989
-                2024-09-15T06:14:26Z  2A00:23C5:E212:D01:6C47:DA76:1B3A:6B89
-                2024-09-15T05:33:37Z  Aaw1989
-                2024-09-15T05:27:34Z  2A00:23C5:E212:D01:45BB:6B02:C2F7:E796
-                2024-09-15T05:17:25Z  2A00:23C5:E212:D01:45BB:6B02:C2F7:E796
-                2024-09-15T05:15:37Z  2A00:23C5:E212:D01:45BB:6B02:C2F7:E796
-                2024-09-15T05:13:53Z  2A00:23C5:E212:D01:45BB:6B02:C2F7:E796
-                2024-09-15T05:12:42Z  Aaw1989
-                2024-09-15T02:46:21Z  2A00:23C5:E212:D01:45BB:6B02:C2F7:E796
-                2024-09-15T02:45:27Z  2A00:23C5:E212:D01:45BB:6B02:C2F7:E796
-                2024-09-15T01:12:01Z  Aaw1989
-                """);
-    }
-    */
-
 
 }
