@@ -18,8 +18,10 @@ public class APIRevisionReader {
             stableConnection.setRequestProperty("User-Agent", "Revision Reporter/0.1 jason/yoder2@bsu.edu");
             return stableConnection.getInputStream();
         } catch(IOException e) {
-            throw new IOException("Error: Connection Failure", e);
+            System.err.println("Error: Connection Failure");
+            System.exit(0);
         }
+        return null;
     }
 
     public URL createURL(String articleSearch) throws IOException{

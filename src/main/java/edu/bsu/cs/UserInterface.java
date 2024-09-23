@@ -19,21 +19,19 @@ public class UserInterface {
         System.out.println("Enter the title of an article:");
         String articleName = userInput.nextLine();
 
+        checkArticleName(articleName);
+
+        String jsonData = getRevisionData(articleName);
+        System.out.println();
+        System.out.println(printRevisionsData(jsonData));
+
+    }
+
+    public void checkArticleName(String articleName) {
         if (articleName.isEmpty()) {
             System.err.println("System Error: No Article Name Submitted");
             System.exit(0);
         }
-        String jsonData = getRevisionData(articleName);
-
-        if (jsonData.contains("Error:")) {
-            System.err.println("System Error: Connection Failure");
-            System.exit(0);
-        }
-
-        System.out.println();
-        String results = printRevisionsData(jsonData);
-        System.out.println(results);
-
     }
 
     public String getRevisionData(String articleName) {
