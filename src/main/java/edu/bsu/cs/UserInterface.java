@@ -14,24 +14,20 @@ public class UserInterface {
     }
 
     public void runApplication(){
-
         Scanner userInput = new Scanner(System.in);
+
         System.out.println("Enter the title of an article:");
         String articleName = userInput.nextLine();
-
-        checkArticleName(articleName);
+        checkForArticleName(articleName);
 
         String jsonData = getRevisionData(articleName);
-        System.out.println();
-        System.out.println(printRevisionsData(jsonData));
+        checkForConnection(jsonData);
 
-    }
+        String results = printRevisionsData(jsonData);
+        checkForNoArticleFound(results);
 
-    public void checkArticleName(String articleName) {
-        if (articleName.isEmpty()) {
-            System.err.println("System Error: No Article Name Submitted");
-            System.exit(0);
-        }
+        System.out.println(results);
+
     }
 
     public String getRevisionData(String articleName) {
@@ -48,5 +44,26 @@ public class UserInterface {
     public String printRevisionsData(String jsonData) {
         JSONHandler handler = new JSONHandler();
         return handler.printData(jsonData);
+    }
+
+    public void checkForArticleName(String articleName) {
+        if(articleName.isEmpty()) {
+            System.err.println("System Error: No Article Name Submitted");
+            System.exit(0);
+        }
+    }
+
+    public void checkForConnection(String data) {
+        if (data.contains("Error:")) {
+            System.err.println("System Error: Connection Failure");
+            System.exit(0);
+        }
+    }
+
+    public void checkForNoArticleFound(String results) {
+        if (results.equals("System error: No Wikipedia page with that title.\n")) {
+            System.err.println("System error: No Wikipedia page with that title.\n");
+            System.exit(0);
+        }
     }
 }

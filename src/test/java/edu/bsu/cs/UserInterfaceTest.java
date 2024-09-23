@@ -14,7 +14,7 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void testPrintRevisionsData() {
+    public void testPrintRevisionsData(){
         UserInterface ui = new UserInterface();
         String jsonData = ui.getRevisionData("Frank Zappa");
         String result = ui.printRevisionsData(jsonData);
@@ -39,6 +39,7 @@ public class UserInterfaceTest {
 
     //This test only can be used is runApplication method is modified to accept a string parameter instead of user input. It does pass
     /*
+
     @Test
     public void testRunApplication() throws IOException{
         UserInterface ui = new UserInterface();

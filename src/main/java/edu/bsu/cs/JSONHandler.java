@@ -12,8 +12,7 @@ public class JSONHandler {
         int numOfRevisions = revisions.size();
 
         if(checkForArticle(jsonData)){
-            System.err.println("System error: No Wikipedia page with that title.\n");
-            System.exit(0);
+            return "System error: No Wikipedia page with that title.\n";
         }
 
         outputBuilder.append(checkForRedirection(jsonData));
@@ -21,28 +20,6 @@ public class JSONHandler {
         outputBuilder.append(readRevisions(jsonData));
 
         return outputBuilder.toString();
-    }
-
-    public String checkForRedirection(String jsonData) {
-        if (jsonData.contains("\"redirects\"")) {
-            JSONArray redirection = JsonPath.read(jsonData, "$.query.redirects[*].to");
-            return"Redirected to " + redirection.getFirst().toString() + ".\n";
-        } else {
-            return "";
-        }
-    }
-
-    public String checkForLessThan15Revisions(int length) {
-        if (length < 15) {
-            return "There are only " + length + " revisions.\n";
-        } else {
-            return "";
-        }
-    }
-
-    public boolean checkForArticle(String jsonData) {
-        JSONArray missingArray = JsonPath.read(jsonData, "$.query.pages[*].missing");
-        return !missingArray.isEmpty();
     }
 
     public String readRevisions(String jsonData) {
@@ -56,6 +33,29 @@ public class JSONHandler {
         }
         return revisionsBuilder.toString();
     }
+
+    public String checkForLessThan15Revisions(int length) {
+        if (length < 15) {
+            return "There are only " + length + " revisions.\n";
+        } else {
+            return "";
+        }
+    }
+
+    public String checkForRedirection(String jsonData) {
+        if (jsonData.contains("\"redirects\"")) {
+            JSONArray redirection = JsonPath.read(jsonData, "$.query.redirects[*].to");
+            return"Redirected to " + redirection.getFirst().toString() + ".\n";
+        } else {
+            return "";
+        }
+    }
+
+    public boolean checkForArticle(String jsonData) {
+        JSONArray missingArray = JsonPath.read(jsonData, "$.query.pages[*].missing");
+        return !missingArray.isEmpty();
+    }
+
 
     public String formatTimeAndUsername(String timestamp, String username) {
         return(timestamp + "  " + username + "\n");
