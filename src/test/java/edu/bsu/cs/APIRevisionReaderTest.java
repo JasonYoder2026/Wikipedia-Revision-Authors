@@ -16,6 +16,7 @@ public class APIRevisionReaderTest {
                 "&redirects=1&formatversion=2&rvprop=timestamp%7Cuser&rvlimit=15", result);
     }
 
+
     @Test
     public void testRetrieveRevisionsFromAPI() throws IOException {
         APIRevisionReader reader = new APIRevisionReader();
