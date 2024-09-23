@@ -32,12 +32,8 @@ public class UserInterface {
 
         System.out.println();
         String results = printRevisionsData(jsonData);
-        if (results.equals("System error: No Wikipedia page with that title.\n")) {
-            System.err.println("System error: No Wikipedia page with that title.\n");
-            System.exit(0);
-        } else {
-            System.out.println(results);
-        }
+        System.out.println(results);
+
     }
 
     public String getRevisionData(String articleName) {

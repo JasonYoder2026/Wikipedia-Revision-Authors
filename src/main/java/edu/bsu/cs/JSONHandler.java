@@ -12,7 +12,8 @@ public class JSONHandler {
         int numOfRevisions = revisions.size();
 
         if(checkForArticle(jsonData)){
-            return "System error: No Wikipedia page with that title.\n";
+            System.err.println("System error: No Wikipedia page with that title.\n");
+            System.exit(0);
         }
 
         outputBuilder.append(checkForRedirection(jsonData));
