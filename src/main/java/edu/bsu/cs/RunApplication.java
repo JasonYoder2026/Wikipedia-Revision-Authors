@@ -4,14 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class UserInterface {
-
-
-    public static void main(String[] args) {
-        UserInterface revisionsApp = new UserInterface();
-        revisionsApp.runApplication();
-
-    }
+public class RunApplication {
 
     public void runApplication(){
         Scanner userInput = new Scanner(System.in);

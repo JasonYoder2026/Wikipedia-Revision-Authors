@@ -29,5 +29,5 @@ javafx {
 }
 
 application {
-    mainClass.set("edu.bsu.cs.UserInterface")
+    mainClass.set("edu.bsu.cs.UI")
 }
