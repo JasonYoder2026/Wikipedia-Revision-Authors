@@ -16,7 +16,6 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("com.jayway.jsonpath:json-path:2.9.0")
     implementation("net.minidev", "json-smart", "2.5.0")
-    testImplementation("org.slf4j:slf4j-nop:2.0.11")
     implementation("org.slf4j", "slf4j-nop", "2.0.11")
 }
 
@@ -25,7 +24,7 @@ tasks.test {
 }
 
 javafx {
-    version = '22-ea+16'
+    version = "22"
     modules("javafx.controls", "javafx.fxml")
 }
 
