@@ -8,7 +8,7 @@
     <TextField layoutX="273.0" layoutY="23.0" prefHeight="26.0" prefWidth="244.0"
                promptText="Enter the name of an article"/>
     <Button layoutX="369.0" layoutY="63.0" mnemonicParsing="false" text="Search" textAlignment="CENTER"
-            textFill="#5248ef"/>
+            textFill="#ef0006"/>
     <TableView layoutX="158.0" layoutY="143.0" prefHeight="337.0" prefWidth="474.0">
       <columns>
           <TableColumn prefWidth="236.1999969482422" text="Timestamp"/>
