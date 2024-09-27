@@ -1,9 +1,16 @@
 package edu.bsu.cs;
 
-public class UI {
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class UI extends Application {
     public static void main(String[] args) {
-        RunApplication revisionsApp = new RunApplication();
-        revisionsApp.runApplication();
+        launch(args);
     }
 
+    @Override
+    public void start(Stage mainStage) throws Exception {
+        mainStage.setTitle("WikiMedia Revisions App");
+        mainStage.show();
+    }
 }
