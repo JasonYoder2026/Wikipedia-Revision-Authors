@@ -5,10 +5,6 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class RunApplication {
-    public static void main(String[] args) {
-        RunApplication run = new RunApplication();
-        run.runApplication();
-    }
 
     public void runApplication(){
         Scanner userInput = new Scanner(System.in);

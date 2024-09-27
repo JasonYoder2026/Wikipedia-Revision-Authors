@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane prefHeight="552.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/17.0.12"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs.UI">
-    <TextField fx:id="searchBox" alignment="CENTER" layoutX="164.0" layoutY="69.0" prefHeight="22.0" prefWidth="299.0"
-               promptText="Enter the title of an article">
-        <font>
-          <Font name="Calibri" size="12.0"/>
-        </font>
-    </TextField>
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs.FxUI">
+    <TextField fx:id="searchBox" layoutX="164.0" layoutY="69.0" prefHeight="22.0" prefWidth="299.0" promptText="Enter the title of an article"/>
+    <Button text="Search" layoutX="480.0" layoutY="69.0" onAction="#handleSearch"/>
 </AnchorPane>
