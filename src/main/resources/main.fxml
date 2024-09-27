@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs.UI" />
+<AnchorPane prefHeight="552.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs.UI">
+    <TextField layoutX="273.0" layoutY="23.0" prefHeight="26.0" prefWidth="244.0"
+               promptText="Enter the name of an article"/>
+    <Button layoutX="369.0" layoutY="63.0" mnemonicParsing="false" text="Search" textAlignment="CENTER"
+            textFill="#5248ef"/>
+    <TableView layoutX="158.0" layoutY="143.0" prefHeight="337.0" prefWidth="474.0">
+      <columns>
+          <TableColumn prefWidth="236.1999969482422" text="Timestamp"/>
+          <TableColumn minWidth="0.0" prefWidth="237.4000244140625" text="Username"/>
+      </columns>
+    </TableView>
+    <TextField editable="false" layoutX="320.0" layoutY="107.0"/>
+</AnchorPane>

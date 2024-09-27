@@ -31,3 +31,7 @@ javafx {
 application {
     mainClass.set("edu.bsu.cs.UI")
 }
+
+tasks.withType<JavaExec> {
+    standardInput = System.`in`
+}
