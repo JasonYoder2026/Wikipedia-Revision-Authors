@@ -30,8 +30,7 @@ public class FxUI {
         try {
             return revisionReader.retrieveRevisionsFromAPI(articleTitle);
         } catch (IOException e) {
-            // Log the exception if needed
-            return null; // Return null to indicate a network error
+            return null; 
         }
     }
 
