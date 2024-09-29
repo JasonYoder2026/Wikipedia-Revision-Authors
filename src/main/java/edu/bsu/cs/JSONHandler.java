@@ -12,7 +12,7 @@ public class JSONHandler {
         int numOfRevisions = revisions.size();
 
         if(checkForArticle(jsonData)){
-            return "System error: No Wikipedia page with that title.\n";
+            return "No Wikipedia page with that title.\n";
         }
 
         outputBuilder.append(checkForRedirection(jsonData));
@@ -45,7 +45,7 @@ public class JSONHandler {
     public String checkForRedirection(String jsonData) {
         if (jsonData.contains("\"redirects\"")) {
             JSONArray redirection = JsonPath.read(jsonData, "$.query.redirects[*].to");
-            return"Redirected to " + redirection.getFirst().toString() + ".\n";
+            return"Redirected to " + redirection.getFirst().toString() + ".\n\n";
         } else {
             return "";
         }

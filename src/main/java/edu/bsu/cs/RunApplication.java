@@ -6,20 +6,27 @@ import java.util.Scanner;
 
 public class RunApplication {
 
-    public void runApplication(){
+    public static void main(String[] args) {
+        RunApplication run = new RunApplication();
+        String articleName = run.getArticleName();
+        String results = run.runApplication(articleName);
+        System.out.println(results);
+    }
+
+    public String getArticleName() {
         Scanner userInput = new Scanner(System.in);
 
         System.out.println("Enter the title of an article:");
-        String articleName = userInput.nextLine();
+        return userInput.nextLine();
+    }
+
+    public String runApplication(String articleName){
         checkForArticleName(articleName);
 
         String jsonData = getRevisionData(articleName);
         checkForConnection(jsonData);
 
-        String results = printRevisionsData(jsonData);
-        checkForNoArticleFound(results);
-
-        System.out.println(results);
+        return printRevisionsData(jsonData);
 
     }
 
@@ -53,10 +60,4 @@ public class RunApplication {
         }
     }
 
-    public void checkForNoArticleFound(String results) {
-        if (results.equals("System error: No Wikipedia page with that title.\n")) {
-            System.err.println("System error: No Wikipedia page with that title.\n");
-            System.exit(0);
-        }
-    }
 }
