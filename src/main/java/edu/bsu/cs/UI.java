@@ -4,10 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -60,8 +57,38 @@ public class UI extends Application {
 
     private void fetchResults() {
         RunApplication runApplication = new RunApplication();
-        String results = runApplication.runApplication(searchBox.getText());
-        resultsBox.setText(results);
+
+        searchBox.setEditable(false);
+        if (searchBox.getText().isEmpty()) {
+            showInputErrorWindow();
+            return;
+        }
+        try {
+            String results = runApplication.runApplication(searchBox.getText());
+            resultsBox.setText(results);
+        } catch (Exception e) {
+            showConnectionErrorWindow();
+            return;
+        }
+        searchBox.setEditable(true);
+    }
+
+    private void showInputErrorWindow() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Input Error");
+        alert.setHeaderText("No Article Name Entered");
+        alert.setContentText("Please enter a title before clicking search.");
+
+        alert.showAndWait();
+    }
+
+    private void showConnectionErrorWindow() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Connection Error");
+        alert.setHeaderText("Failed to establish a connection");
+        alert.setContentText("Please try again later");
+
+        alert.showAndWait();
     }
 
 }

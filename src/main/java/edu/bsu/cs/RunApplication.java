@@ -8,9 +8,13 @@ public class RunApplication {
 
     public static void main(String[] args) {
         RunApplication run = new RunApplication();
-        String articleName = run.getArticleName();
-        String results = run.runApplication(articleName);
-        System.out.println(results);
+        try {
+            String articleName = run.getArticleName();
+            String results = run.runApplication(articleName);
+            System.out.println(results);
+        } catch (Exception e) {
+            ConnectionErrorHandler.handleConnectionError(e.getMessage());
+        }
     }
 
     public String getArticleName() {
@@ -20,11 +24,11 @@ public class RunApplication {
         return userInput.nextLine();
     }
 
-    public String runApplication(String articleName){
+    public String runApplication(String articleName) throws IOException {
         checkForArticleName(articleName);
 
         String jsonData = getRevisionData(articleName);
-        checkForConnection(jsonData);
+        checkForFailedConnection(jsonData);
 
         return printRevisionsData(jsonData);
 
@@ -53,10 +57,9 @@ public class RunApplication {
         }
     }
 
-    public void checkForConnection(String data) {
+    public void checkForFailedConnection(String data) throws IOException {
         if (data.contains("Error:")) {
-            System.err.println("System Error: Connection Failure");
-            System.exit(0);
+            throw new IOException("Connection Failure");
         }
     }
 
