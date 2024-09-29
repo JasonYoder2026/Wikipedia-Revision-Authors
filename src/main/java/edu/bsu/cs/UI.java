@@ -57,20 +57,18 @@ public class UI extends Application {
 
     private void fetchResults() {
         RunApplication runApplication = new RunApplication();
-
-        searchBox.setEditable(false);
         if (searchBox.getText().isEmpty()) {
             showInputErrorWindow();
             return;
         }
         try {
+            searchBox.setEditable(false);
             String results = runApplication.runApplication(searchBox.getText());
             resultsBox.setText(results);
+            searchBox.setEditable(true);
         } catch (Exception e) {
             showConnectionErrorWindow();
-            return;
         }
-        searchBox.setEditable(true);
     }
 
     private void showInputErrorWindow() {

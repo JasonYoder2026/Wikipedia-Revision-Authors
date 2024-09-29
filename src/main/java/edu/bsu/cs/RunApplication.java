@@ -13,7 +13,7 @@ public class RunApplication {
             String results = run.runApplication(articleName);
             System.out.println(results);
         } catch (Exception e) {
-            ConnectionErrorHandler.handleConnectionError(e.getMessage());
+            handleConnectionError(e.getMessage());
         }
     }
 
@@ -61,6 +61,11 @@ public class RunApplication {
         if (data.contains("Error:")) {
             throw new IOException("Connection Failure");
         }
+    }
+
+    public static void handleConnectionError(String message) {
+        System.err.println("System Error: " + message);
+        System.exit(0);
     }
 
 }
