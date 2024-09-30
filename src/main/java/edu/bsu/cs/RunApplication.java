@@ -24,14 +24,10 @@ public class RunApplication {
         return userInput.nextLine();
     }
 
-    public String runApplication(String articleName) throws IOException {
+    public String runApplication(String articleName){
         checkForArticleName(articleName);
-
         String jsonData = getRevisionData(articleName);
-        checkForFailedConnection(jsonData);
-
         return printRevisionsData(jsonData);
-
     }
 
     public String getRevisionData(String articleName) {
@@ -42,7 +38,6 @@ public class RunApplication {
         } catch (IOException e) {
             return ("System Error: " + e.getMessage());
         }
-
     }
 
     public String printRevisionsData(String jsonData) {
@@ -54,12 +49,6 @@ public class RunApplication {
         if(articleName.isEmpty()) {
             System.err.println("System Error: No Article Name Submitted");
             System.exit(0);
-        }
-    }
-
-    public void checkForFailedConnection(String data) throws IOException {
-        if (data.contains("Error:")) {
-            throw new IOException("Connection Failure");
         }
     }
 

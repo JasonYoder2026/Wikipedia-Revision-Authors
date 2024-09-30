@@ -9,6 +9,13 @@ import java.io.InputStream;
 public class JSONHandlerTest {
 
     @Test
+    public void testFormatTimeAndUsername(){
+        JSONHandler testParser = new JSONHandler();
+        String output = testParser.formatTimeAndUsername("2024-09-15T22:53:03Z", "Aaw1989");
+        Assertions.assertEquals("2024-09-15T22:53:03Z  Aaw1989\n", output);
+    }
+
+    @Test
     public void testParseAndReturnData(){
         JSONHandler testParser = new JSONHandler();
         String jsonData = getJsonData(new File("JsonData.json"));
@@ -73,6 +80,15 @@ public class JSONHandlerTest {
                 """);
     }
 
+    @Test
+    public void testMissingArticle() {
+        JSONHandler testHandler = new JSONHandler();
+        String jsonData = getJsonData(new File("Missing.json"));
+        String result = testHandler.returnData(jsonData);
+        Assertions.assertEquals("No Wikipedia page with that title.\n", result);
+    }
+
+
     public String getJsonData(File file) {
         try {
             InputStream testStream = JSONHandlerTest.class.getClassLoader().getResourceAsStream(String.valueOf(file));
@@ -86,35 +102,5 @@ public class JSONHandlerTest {
 
         return null;
     }
-
-    @Test
-    public void testMissingArticle() {
-        JSONHandler testHandler = new JSONHandler();
-        String jsonData = getMissingArticleStream();
-        String result = testHandler.returnData(jsonData);
-        Assertions.assertEquals("No Wikipedia page with that title.\n", result);
-    }
-
-    public String getMissingArticleStream() {
-        try {
-            InputStream testStream = JSONHandlerTest.class.getClassLoader().getResourceAsStream("Missing.json");
-            if(testStream == null) {
-                throw new IllegalArgumentException("File not found!");
-            }
-            return new String(testStream.readAllBytes());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    @Test
-    public void testFormatTimeAndUsername(){
-        JSONHandler testParser = new JSONHandler();
-        String output = testParser.formatTimeAndUsername("2024-09-15T22:53:03Z", "Aaw1989");
-        Assertions.assertEquals("2024-09-15T22:53:03Z  Aaw1989\n", output);
-    }
-
 
 }

@@ -3,6 +3,8 @@ package edu.bsu.cs;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
+
 public class RunApplicationTest {
 
     @Test
@@ -16,8 +18,8 @@ public class RunApplicationTest {
     @Test
     public void testPrintRevisionsData(){
         RunApplication ui = new RunApplication();
-        String jsonData = ui.getRevisionData("Frank Zappa");
-        String result = ui.printRevisionsData(jsonData);
+        String articleName = "Frank Zappa";
+        String result = ui.runApplication(articleName);
         Assertions.assertEquals(result, """
                 2024-09-29T18:56:38Z  JJMC89 bot III
                 2024-09-24T11:11:05Z  ♥Golf
