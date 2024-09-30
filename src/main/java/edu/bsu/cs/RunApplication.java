@@ -47,7 +47,7 @@ public class RunApplication {
 
     public String printRevisionsData(String jsonData) {
         JSONHandler handler = new JSONHandler();
-        return handler.printData(jsonData);
+        return handler.returnData(jsonData);
     }
 
     public void checkForArticleName(String articleName) {

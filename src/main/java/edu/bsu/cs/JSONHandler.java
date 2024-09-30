@@ -5,18 +5,19 @@ import net.minidev.json.JSONArray;
 
 public class JSONHandler {
 
-    public String printData(String jsonData) {
+    public String returnData(String jsonData) {
+        JSONExceptionsHandler handler = new JSONExceptionsHandler();
         StringBuilder outputBuilder = new StringBuilder();
 
         JSONArray revisions = JsonPath.read(jsonData, "$..timestamp");
         int numOfRevisions = revisions.size();
 
-        if(checkForArticle(jsonData)){
+        if(handler.checkForArticle(jsonData)){
             return "No Wikipedia page with that title.\n";
         }
 
-        outputBuilder.append(checkForRedirection(jsonData));
-        outputBuilder.append(checkForLessThan15Revisions(numOfRevisions));
+        outputBuilder.append(handler.checkForRedirection(jsonData));
+        outputBuilder.append(handler.checkForLessThan15Revisions(numOfRevisions));
         outputBuilder.append(readRevisions(jsonData));
 
         return outputBuilder.toString();
@@ -32,28 +33,6 @@ public class JSONHandler {
             revisionsBuilder.append(formattedOutput);
         }
         return revisionsBuilder.toString();
-    }
-
-    public String checkForLessThan15Revisions(int length) {
-        if (length < 15) {
-            return "There are only " + length + " revisions.\n";
-        } else {
-            return "";
-        }
-    }
-
-    public String checkForRedirection(String jsonData) {
-        if (jsonData.contains("\"redirects\"")) {
-            JSONArray redirection = JsonPath.read(jsonData, "$.query.redirects[*].to");
-            return"Redirected to " + redirection.getFirst().toString() + ".\n\n";
-        } else {
-            return "";
-        }
-    }
-
-    public boolean checkForArticle(String jsonData) {
-        JSONArray missingArray = JsonPath.read(jsonData, "$.query.pages[*].missing");
-        return !missingArray.isEmpty();
     }
 
 

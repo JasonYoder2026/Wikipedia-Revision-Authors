@@ -25,5 +25,12 @@ public class APIRevisionReaderTest {
         InputStream stream = reader.retrieveRevisionsFromAPI(search);
         Assertions.assertNotNull(stream);
     }
-}
 
+    //This test will only work if you disable internet connection on your PC
+    @Test
+    public void testConnectionFailure(){
+        APIRevisionReader reader = new APIRevisionReader();
+        String search = "Zappa";
+        Assertions.assertThrows(IOException.class, () -> reader.retrieveRevisionsFromAPI(search));
+    }
+}
