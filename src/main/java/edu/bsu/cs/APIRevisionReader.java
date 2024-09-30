@@ -10,13 +10,14 @@ import java.nio.charset.StandardCharsets;
 
 public class APIRevisionReader {
 
-    public InputStream retrieveRevisionsFromAPI(String articleTitle) throws IOException {
+    public String retrieveRevisionsFromAPI(String articleTitle) throws IOException {
         URL url = createURL(articleTitle);
         try {
             HttpURLConnection stableConnection = (HttpURLConnection) url.openConnection();
             stableConnection.setRequestMethod("GET");
             stableConnection.setRequestProperty("User-Agent", "Revision Reporter/0.1 jason/yoder2@bsu.edu");
-            return stableConnection.getInputStream();
+            InputStream dataStream = stableConnection.getInputStream();
+            return new String(dataStream.readAllBytes());
         } catch(IOException e) {
             throw new IOException("Error: Connection Failure", e);
         }

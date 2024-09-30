@@ -1,7 +1,6 @@
 package edu.bsu.cs;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Scanner;
 
 public class RunApplication {
@@ -33,8 +32,7 @@ public class RunApplication {
     public String getRevisionData(String articleName) {
         try {
             APIRevisionReader revisionReader = new APIRevisionReader();
-            InputStream jsonStream = revisionReader.retrieveRevisionsFromAPI(articleName);
-            return new String(jsonStream.readAllBytes());
+            return revisionReader.retrieveRevisionsFromAPI(articleName);
         } catch (IOException e) {
             return ("System Error: " + e.getMessage());
         }
