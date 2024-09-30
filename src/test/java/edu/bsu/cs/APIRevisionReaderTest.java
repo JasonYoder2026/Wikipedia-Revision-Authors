@@ -3,7 +3,6 @@ package edu.bsu.cs;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
-import java.io.InputStream;
 
 
 public class APIRevisionReaderTest {
@@ -21,12 +20,17 @@ public class APIRevisionReaderTest {
     @Test
     public void testRetrieveRevisionsFromAPI() throws IOException {
         APIRevisionReader reader = new APIRevisionReader();
+        boolean testFail = true;
         String search = "Zappa";
-        InputStream stream = reader.retrieveRevisionsFromAPI(search);
-        Assertions.assertNotNull(stream);
+        String data = reader.retrieveRevisionsFromAPI(search);
+        if (!data.isEmpty()) {
+            testFail = false;
+        }
+        Assertions.assertFalse(testFail);
     }
 
     //This test will only work if you disable internet connection on your PC
+    //Suppressed warning below because of internet connection being needed for the majority of tests
     @Test
     public void testConnectionFailure(){
         APIRevisionReader reader = new APIRevisionReader();

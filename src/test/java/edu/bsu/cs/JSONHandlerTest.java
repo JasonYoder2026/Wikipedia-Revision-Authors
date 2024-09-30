@@ -91,12 +91,13 @@ public class JSONHandlerTest {
 
     public String getJsonData(File file) {
         try {
-            InputStream testStream = JSONHandlerTest.class.getClassLoader().getResourceAsStream(String.valueOf(file));
+            InputStream testStream = JSONHandlerTest.class.getClassLoader().getResourceAsStream(String.valueOf(file)); // Suppressed warning from imported class
             if(testStream == null) {
                 throw new IllegalArgumentException("File not found!");
             }
             return new String(testStream.readAllBytes());
         } catch(Exception e) {
+            //Suppressed warning for test class scope
             e.printStackTrace();
         }
 
